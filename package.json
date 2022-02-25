@@ -1,0 +1,19 @@
+{
+  "name": "nbm-team-profile-generator",
+  "version": "1.0.0",
+  "description": "Index.html generator application that takes in employee information and displays summaries of each employee.",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NathanMilburn/NBM-Team-Profile-Generator.git"
+  },
+  "author": "NathanM",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NathanMilburn/NBM-Team-Profile-Generator/issues"
+  },
+  "homepage": "https://github.com/NathanMilburn/NBM-Team-Profile-Generator#readme"
+}
