@@ -36,3 +36,17 @@ inquirer
       err ? console.log(err) : console.log('Employee Profile Page Created!')
       );
     });
+
+    // Test Template for html //
+/* <div id="employeeList" class="container mt-4">
+    <div class="row">
+        <div class="col col-md-4 card bg-primary text-white Employee1" style="width: 18rem;">
+            <div class="card-body">
+                <h4 id="Name" class="card-title Employee1"></h4>
+            </div>
+        <ul class="list-group list-group-flush Stats">
+            <li class="list-group-item Temp" id="name"></li>
+            <li class="list-group-item Wind" id="Wind"></li>
+            <li class="list-group-item Humidity" id="Humidity"></li>
+        </ul>
+    </div> */
