@@ -18,5 +18,8 @@
   "homepage": "https://github.com/NathanMilburn/NBM-Team-Profile-Generator#readme",
   "dependencies": {
     "inquirer": "^8.2.0"
+  },
+  "devDependencies": {
+    "jest": "^27.5.1"
   }
 }
