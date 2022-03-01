@@ -4,7 +4,7 @@
   "description": "Index.html generator application that takes in employee information and displays summaries of each employee.",
   "main": "index.js",
   "scripts": {
-    "test": "test"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
