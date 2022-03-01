@@ -1,7 +1,7 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
 
-const generateHTML = ({ name, position, idNumber, officeNumber, email, github}) =>
+const generateHTML = ({ name, role, idNumber, officeNumber, email, github}) =>
 `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,7 +24,7 @@ const generateHTML = ({ name, position, idNumber, officeNumber, email, github}) 
     <div class="col=12 card">
         <div class="card-header">
             <h2 class="card-title">${name}</h2>
-            <h2 class="card-title"><i class="fas fa-glasses mr-2"></i>${position}</h2>
+            <h2 class="card-title"><i class="fas fa-glasses mr-2"></i>${role}</h2>
         </div>    
         <div class="card-body">
                 <ul class="list-group">
@@ -33,7 +33,7 @@ const generateHTML = ({ name, position, idNumber, officeNumber, email, github}) 
                 <li class="list-group-item">Email: ${email}</li>
                 <li class="list-group-item">GitHub: ${github}</li>
                 </ul>
-            </div>
+        </div>
     </div>
 </div> 
 </body>
