@@ -1,14 +1,13 @@
 # NBM-Team-Profile-Generator
 
 ## USER STORY
-AS A Web developer
 
-I WANT to create an index.html generator that displays a webpage of a user's basic info supplied through inquirer prompts
-
-SO THAT I can display my skills and understanding of object oriented programming and file generation through node.
+    AS A Web developer
+    I WANT to create an index.html generator that displays a webpage of a user's basic info supplied through inquirer prompts
+    SO THAT I can display my skills and understanding of object oriented programming and file generation through node.
 
 ## DESCRIPTION
-
+A command line application that acts as a software engineering team-generator by prompting the user for role information about the team manager and subsequent information about the following team members. Any number of team members can be submitted to the application with no limit on either engineers or interns. Once all relevant information is submitted and the questionaire is complete, an HTML page is generated that displays styled information cards for each member of the team.
 
 ## APPLICATION IN USE
 
