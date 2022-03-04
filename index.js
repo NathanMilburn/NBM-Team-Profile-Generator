@@ -92,13 +92,13 @@ function managerInfo() {
     });
 }
 
-function addTeamMember() {
+function addMembers() {
   inquirer
     .prompt([
       {
         type: "list",
         name: "what_type",
-        message: "Add an engineer or intern to the team?",
+        message: "Would you like to add an engineer or intern to the team?",
         choices: ["Engineer", "Intern", "No more members to add"],
       },
     ])
