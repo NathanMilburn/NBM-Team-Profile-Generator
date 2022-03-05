@@ -1,6 +1,7 @@
 const Manager = require("./lib/Manager");
 const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
+const Employee = require("./lib/Employee");
 const inquirer = require("inquirer");
 const fs = require("fs");
 
@@ -36,7 +37,12 @@ function managerInfo() {
       },
     ])
     .then((val) => {
-      const manager = new Manager(val.name,val.id,val.email,val.officeNumber);
+      const manager = new Manager(
+        val.name,
+        val.id,
+        val.email,
+        val.officeNumber
+      );
       teamMembers.push(manager);
       addMembers();
     });
@@ -58,6 +64,7 @@ function addMembers() {
       } else if (val.what_type === "Intern") {
         internInfo();
       } else {
+        updateHTML();
         finishHtml();
       }
     });
@@ -150,7 +157,6 @@ function generateHtml() {
   });
 }
 
-
 function finishHtml() {
   const html = ` </div>
   </div>
@@ -159,11 +165,63 @@ function finishHtml() {
 </html>`;
 
   fs.appendFile("ourTeam.html", html, function (err) {
-      if (err) {
-          console.log(err);
-      };
+    if (err) {
+      console.log(err);
+    }
   });
   console.log("end");
 }
 
 startGenerator();
+
+// Test function for appending to the html file //
+// function updateHTML(member) {
+//   const name = member.getName();
+//   const role = member.getRole();
+//   const id = member.getId();
+//   const email = member.getEmail();
+//   let data = "";
+//   if (role === "Manager") {
+//     const officeNumber = member.getOfficeNumber();
+//     data = `<div class="col-6">
+//             <div class="card mx-auto mb-3" style="width: 18rem">
+//             <h5 class="card-header">${name}<br /><br />Manager</h5>
+//             <ul class="list-group list-group-flush">
+//                 <li class="list-group-item">Employee ID: ${id}</li>
+//                 <li class="list-group-item">Email: ${email}</li>
+//                 <li class="list-group-item">Office #: ${officeNumber}</li>
+//             </ul>
+//             </div>
+//         </div>`;
+//   } else if (role === "Engineer") {
+//     const gitHub = member.getGithub();
+//     data = `<div class="col-6">
+//       <div class="card mx-auto mb-3" style="width: 18rem">
+//       <h5 class="card-header">${name}<br /><br />Engineer</h5>
+//       <ul class="list-group list-group-flush">
+//           <li class="list-group-item">ID: ${id}</li>
+//           <li class="list-group-item">Email Address: ${email}</li>
+//           <li class="list-group-item">GitHub: ${gitHub}</li>
+//       </ul>
+//       </div>
+//   </div>`;
+//   } else {
+//     const school = member.getSchool();
+//     data = `<div class="col-6">
+//             <div class="card mx-auto mb-3" style="width: 18rem">
+//             <h5 class="card-header">${name}<br /><br />Intern</h5>
+//             <ul class="list-group list-group-flush">
+//                 <li class="list-group-item">ID: ${id}</li>
+//                 <li class="list-group-item">Email Address: ${email}</li>
+//                 <li class="list-group-item">School: ${school}</li>
+//             </ul>
+//             </div>
+//         </div>`;
+//   }
+//   console.log("adding team member");
+//   fs.appendFile("ourTeam.html", data, function (err) {
+//     if (err) {
+//       console.log(err);
+//     }
+//   });
+// }
