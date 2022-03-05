@@ -4,60 +4,11 @@ const Intern = require("./lib/Intern");
 const inquirer = require("inquirer");
 const fs = require("fs");
 
-const generateHTML = ({ name, role, idNumber, officeNumber, email, github }) =>
-  `<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <script src="https://kit.fontawesome.com/825c894de9.js" crossorigin="anonymous"></script>
-    <title>Employee Profiles</title>
-</head>
-<header>
-    <div class="shadow-lg jumbotron jumbotron-fluid w-100">
-        <div>
-            <h1 class="display-4">Our Employees</h1>
-        </div>
-    </div>
-</header>
-<body>
-    <div class="row w-100">
-    <div class="col=12 card">
-        <div class="card-header">
-            <h2 class="card-title">${name}</h2>
-            <h2 class="card-title"><i class="fas fa-glasses mr-2"></i>${role}</h2>
-        </div>    
-        <div class="card-body">
-                <ul class="list-group">
-                <li class="list-group-item">ID: ${idNumber}</li>
-                <li class="list-group-item">Office Number: ${officeNumber}</li>
-                <li class="list-group-item">Email: ${email}</li>
-                <li class="list-group-item">GitHub: ${github}</li>
-                </ul>
-        </div>
-    </div>
-</div> 
-</body>
-</html>`;
-
-// inquirer
-//     .prompt([
-
-//     ])
-//     .then((answers) => {
-//       const generateHTMLPage = generateHTML(answers)
-
-//       fs.writeFile('index.html', generateHTMLPage, (err) =>
-//       err ? console.log(err) : console.log('Employee Profile Page Created!')
-//       );
-//     });
-
 const teamMembers = [];
 
 function startGenerator() {
   managerInfo();
+  generateHtml();
 }
 
 function managerInfo() {
@@ -85,12 +36,9 @@ function managerInfo() {
       },
     ])
     .then((val) => {
-      const manager = new Manager(
-        val.name,
-        val.id,
-        val.email,
-        val.officeNumber
-      );
+      const manager = new Manager(val.name,val.id,val.email,val.officeNumber);
+      teamMembers.push(manager);
+      addMembers();
     });
 }
 
@@ -110,7 +58,7 @@ function addMembers() {
       } else if (val.what_type === "Intern") {
         internInfo();
       } else {
-        createDocument();
+        finishHtml();
       }
     });
 }
@@ -121,30 +69,30 @@ function engineerInfo() {
       {
         type: "input",
         name: "name",
-        message: "What is the engineer's name?"
+        message: "What is the engineer's name?",
       },
       {
         type: "input",
         name: "id",
-        message: "What is the engineer's employee ID number?"
+        message: "What is the engineer's employee ID number?",
       },
       {
         type: "input",
         name: "email",
-        message: "What is the engineer's email address?"
+        message: "What is the engineer's email address?",
       },
       {
         type: "input",
         name: "github",
-        message: "What is the engineer's GitHub username?"
-      }
-    ]).then(val => {
+        message: "What is the engineer's GitHub username?",
+      },
+    ])
+    .then((val) => {
       const engineer = new Engineer(val.name, val.id, val.email, val.github);
-      console.log(engineer);
       teamMembers.push(engineer);
       addMembers();
-    })
-};
+    });
+}
 
 function internInfo() {
   inquirer
@@ -152,27 +100,70 @@ function internInfo() {
       {
         type: "input",
         name: "name",
-        message: "What is the intern's name?"
+        message: "What is the intern's name?",
       },
       {
         type: "input",
         name: "id",
-        message: "What is the intern's employee ID number?"
+        message: "What is the intern's employee ID number?",
       },
       {
         type: "input",
         name: "email",
-        message: "What is the intern's email address?"
+        message: "What is the intern's email address?",
       },
       {
         type: "input",
         name: "school",
-        message: "What school does the intern currently attend?"
-      }
-    ]).then(val => {
+        message: "What school does the intern currently attend?",
+      },
+    ])
+    .then((val) => {
       const intern = new Intern(val.name, val.id, val.email, val.school);
-      console.log(intern);
       teamMembers.push(intern);
       addMembers();
-    })
-};
+    });
+}
+
+function generateHtml() {
+  const html = `<!DOCTYPE html>
+  <html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta http-equiv="X-UA-Compatible" content="ie=edge">
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+      <title>Team Profile</title>
+  </head>
+  <body>
+    <div class="shadow-lg jumbotron jumbotron-fluid w-100">
+      <div class="d-flex justify-content-center container">
+        <h1 class="display-4">Our Employees</h1>
+      </div>
+    </div>
+      <div class="container">
+          <div class="row">`;
+  fs.writeFile("ourTeam.html", html, function (err) {
+    if (err) {
+      console.log(err);
+    }
+  });
+}
+
+
+function finishHtml() {
+  const html = ` </div>
+  </div>
+  
+</body>
+</html>`;
+
+  fs.appendFile("ourTeam.html", html, function (err) {
+      if (err) {
+          console.log(err);
+      };
+  });
+  console.log("end");
+}
+
+startGenerator();
