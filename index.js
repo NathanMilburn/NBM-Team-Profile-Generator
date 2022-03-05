@@ -54,6 +54,8 @@ const generateHTML = ({ name, role, idNumber, officeNumber, email, github }) =>
 //       );
 //     });
 
+const teamMembers = [];
+
 function startGenerator() {
   managerInfo();
 }
@@ -69,7 +71,7 @@ function managerInfo() {
       {
         type: "input",
         name: "id",
-        message: "What is the team manager's employee ID?",
+        message: "What is the team manager's employee ID number?",
       },
       {
         type: "input",
@@ -112,3 +114,65 @@ function addMembers() {
       }
     });
 }
+
+function engineerInfo() {
+  inquirer
+    .prompt([
+      {
+        type: "input",
+        name: "name",
+        message: "What is the engineer's name?"
+      },
+      {
+        type: "input",
+        name: "id",
+        message: "What is the engineer's employee ID number?"
+      },
+      {
+        type: "input",
+        name: "email",
+        message: "What is the engineer's email address?"
+      },
+      {
+        type: "input",
+        name: "github",
+        message: "What is the engineer's GitHub username?"
+      }
+    ]).then(val => {
+      const engineer = new Engineer(val.name, val.id, val.email, val.github);
+      console.log(engineer);
+      teamMembers.push(engineer);
+      addMembers();
+    })
+};
+
+function internInfo() {
+  inquirer
+    .prompt([
+      {
+        type: "input",
+        name: "name",
+        message: "What is the intern's name?"
+      },
+      {
+        type: "input",
+        name: "id",
+        message: "What is the intern's employee ID number?"
+      },
+      {
+        type: "input",
+        name: "email",
+        message: "What is the intern's email address?"
+      },
+      {
+        type: "input",
+        name: "school",
+        message: "What school does the intern currently attend?"
+      }
+    ]).then(val => {
+      const intern = new Intern(val.name, val.id, val.email, val.school);
+      console.log(intern);
+      teamMembers.push(intern);
+      addMembers();
+    })
+};
