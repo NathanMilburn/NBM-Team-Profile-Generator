@@ -1,7 +1,7 @@
 const Manager = require("./lib/Manager");
 const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
-const Employee = require("./lib/Employee");
+// const Employee = require("./lib/Employee");
 const inquirer = require("inquirer");
 const fs = require("fs");
 
@@ -44,6 +44,7 @@ function managerInfo() {
         val.officeNumber
       );
       teamMembers.push(manager);
+      // updateHTML();
       addMembers();
     });
 }
@@ -64,7 +65,7 @@ function addMembers() {
       } else if (val.what_type === "Intern") {
         internInfo();
       } else {
-        updateHTML();
+        // updateHTML();
         finishHtml();
       }
     });
@@ -97,6 +98,7 @@ function engineerInfo() {
     .then((val) => {
       const engineer = new Engineer(val.name, val.id, val.email, val.github);
       teamMembers.push(engineer);
+      // updateHTML();
       addMembers();
     });
 }
@@ -128,6 +130,7 @@ function internInfo() {
     .then((val) => {
       const intern = new Intern(val.name, val.id, val.email, val.school);
       teamMembers.push(intern);
+      // updateHTML();
       addMembers();
     });
 }
