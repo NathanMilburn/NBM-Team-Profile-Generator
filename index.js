@@ -1,15 +1,17 @@
+// Pull from classes for each role
 const Manager = require("./lib/Manager");
 const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
+
+
 const path = require("path");
 const inquirer = require("inquirer");
 const fs = require("fs");
 
-const OUTPUT_DIR = path.resolve(__dirname, "output");
-const outputPath = path.join(OUTPUT_DIR, "ourteam.html");
+const OUTPUT_DIR = path.resolve(__dirname, "dist");
+const outputPath = path.join(OUTPUT_DIR, "index.html");
 
-const render = require("./lib/createhtml");
-
+const render = require("./src/createhtml");
 const teamMembers = [];
 
 function startGenerator() {
@@ -40,14 +42,13 @@ function managerInfo() {
         message: "What is the team manager's office number?",
       },
     ])
-    .then((val) => {
+    .then((data) => {
       const manager = new Manager(
-        val.name,
-        val.id,
-        val.email,
-        val.officeNumber
+        data.name,
+        data.id,
+        data.email,
+        data.officeNumber
       );
-      console.log(manager);
       teamMembers.push(manager);
       addMembers();
     });
@@ -77,14 +78,13 @@ function engineerInfo() {
         message: "What is the engineer's GitHub username?",
       },
     ])
-    .then((val) => {
+    .then((data) => {
       const engineer = new Engineer(
-      val.name, 
-      val.id, 
-      val.email, 
-      val.github
+      data.name, 
+      data.id, 
+      data.email, 
+      data.github
       );
-      console.log(engineer);
       teamMembers.push(engineer);
       addMembers();
     });
@@ -114,15 +114,14 @@ function internInfo() {
         message: "What school does the intern currently attend?",
       },
     ])
-    .then((val) => {
+    .then((data) => {
       const intern = new Intern(
-      val.name, 
-      val.id, 
-      val.email, 
-      val.school
+      data.name, 
+      data.id, 
+      data.email, 
+      data.school
       );
       teamMembers.push(intern);
-      console.log(intern);
       addMembers();
     });
 }
@@ -137,10 +136,10 @@ function addMembers() {
         choices: ["Engineer", "Intern", "No more members to add"],
       },
     ])
-    .then((val) => {
-      if (val.select_role === "Engineer") {
+    .then((data) => {
+      if (data.select_role === "Engineer") {
         engineerInfo();
-      } else if (val.select_role === "Intern") {
+      } else if (data.select_role === "Intern") {
         internInfo();
       } else {
         finishHtml();
@@ -149,10 +148,9 @@ function addMembers() {
 }
 
 function finishHtml() {
-  if (!fs.existsSync(OUTPUT_DIR)) {
-    fs.mkdirSync(OUTPUT_DIR);
-  }
-  fs.writeFileSync(outputPath, render(teamMembers), "UTF-8");
+  fs.writeFileSync(outputPath, render(teamMembers));
 }
+
 startGenerator();
+
 
