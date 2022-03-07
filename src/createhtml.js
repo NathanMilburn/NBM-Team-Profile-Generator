@@ -1,4 +1,5 @@
 function generateHTML(team) {
+    // Manager HTML card styling template
     function managerHTML(manager){
         return `
         <div class="card employee-card">
@@ -16,6 +17,7 @@ function generateHTML(team) {
         </div>
         `;
     }
+    // Engineer HTML card styling template
     function engineerHTML(engineer) {
         return `
         <div class="card employee-card">
@@ -33,6 +35,7 @@ function generateHTML(team) {
         </div>
         `;
     }
+    // Intern HTML card styling template
     function internHTML(intern) {
         return `
         <div class="card employee-card">
@@ -69,6 +72,7 @@ function generateHTML(team) {
     return html.join("");
 }
 
+// Main Page HTML styling template
 module.exports = (team) => {
     return `
     <!DOCTYPE html>
