@@ -52,7 +52,9 @@ Add Members Questionaire
 
 ![AddMembersQuestionaire](./assets/Add-Members-Questionaire.PNG "Add Members Questionaire")
 
+Finished HTML Page
 
+![FinishedHTMLPage](./assets/_C__Users_ThrillHaus_Desktop_Code_Homework_NBM-Team-Profile-Generator_dist_index.html.png "Finished HTML Page")
 
 ## USAGE 
 Though the current roles are for managers, engineers, and interns, I believe this application can be used for any time of multi-member team creation and can help build an easy to understand list of team members in order of position and relevant role information.
